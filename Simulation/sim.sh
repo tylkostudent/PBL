@@ -1,5 +1,11 @@
 #!/bin/bash
 
+test -d ./Output
+
+if [ $? -ne 0 ]; then
+    mkdir Output
+fi
+
 #Hex generation
 python3  ../scripts/hex_generator.py ../scripts/opcode_list.txt ../scripts/instruction_list.txt hex.hex
 
