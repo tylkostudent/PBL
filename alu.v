@@ -11,7 +11,7 @@ module alu #(
     bit_mem_a,
     word_mem_a,
     rf_a,
-    imm_a,
+    imm_a, 
 
     source2_choice,
     bit_mem_b,

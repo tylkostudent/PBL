@@ -1,9 +1,10 @@
 module crtl_mod_tb2;
+	`include"instructions.sv"
 	reg clk, rst, zero_flag;
 	wire [OPCODE_WIDTH - 1:0] op_code;
 	wire [VALUE_WIDTH - 1:0] source1, source2, destination;
 	wire [1:0] source1_choice, source2_choice, destination_choice;
-	wire push, pop;
+	wire push, pop, instr_addr;
 
 	control_module constrol_module(
 		//inputs 
@@ -19,7 +20,8 @@ module crtl_mod_tb2;
 		.source2_choice(source2_choice), 
 		.destination_choice(destination_choice),
 		.push(push), 
-		.pop(pop)
+		.pop(pop),
+		.instr_addr(instr_addr)
 	);
 
 	always begin 

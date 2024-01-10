@@ -1,3 +1,5 @@
+`include"instructions.sv"
+`define STACK_MOD
 module control_module (
 	//inputs 
 	clk, rst, zero_flag,
@@ -5,15 +7,15 @@ module control_module (
 	op_code,
 	source1, source2, destination, 
 	source1_choice, source2_choice, destination_choice,
-	push, pop
+	push, pop, instr_addr
 );
 	input clk, rst, zero_flag;
 	output [OPCODE_WIDTH - 1:0] op_code;
 	output [REGISTER_WIDTH - 1:0] source1, source2, destination;
 	output [1:0] source1_choice, source2_choice, destination_choice;
 	output push, pop; 
+	output [PC_WIDTH - 1:0] instr_addr;
 	wire [PC_WIDTH - 1:0] jmp_addr, ret_addr;
-	wire [PC_WIDTH - 1:0] instr_addr;
 	wire [INSTRUCTION_WIDTH - 1:0] instruction; 
 	wire [OPCODE_WIDTH - 1:0] op_code;
 	wire [VALUE_WIDTH - 1:0] source1, source2, destination;
@@ -63,7 +65,16 @@ module control_module (
 		.push(push), //push registers to stack	
 		.pop(pop)   //pop stack registers
 	);
-	
+`ifdef STACK_MOD
+	stack stack(
+		.clock(clk),
+		.call(cal),
+		.ret(ret),
+		.reset(rst),
+		.called_from(instr_addr),
+		.return_to(ret_addr)
+	);
+`else
 	linked_reg#(
 		.PC_SIZE(PC_WIDTH)
 	)linked_reg(
@@ -73,5 +84,6 @@ module control_module (
 		.instr_addr(instr_addr),
 		.ret_addr(ret_addr)
 	);
+`endif
 
 endmodule

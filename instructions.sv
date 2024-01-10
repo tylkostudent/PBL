@@ -1,3 +1,6 @@
+`ifndef INSTUCTIONS_H
+`define INSTUCTIONS_H
+`include"parameters.sv"
 enum bit [OPCODE_WIDTH - 1:0] {
   AND  = 6'h00,
   ANDN = 6'h01,
@@ -33,3 +36,4 @@ enum bit [OPCODE_WIDTH - 1:0] {
   LD   = 6'h1F,
   LDN  = 6'h20
 }opCodes;
+`endif

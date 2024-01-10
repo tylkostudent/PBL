@@ -6,8 +6,6 @@ module decoder#(
 	parameter INSTRUCTION_WIDTH = 40
 )
 (
-//	`include"instructions.h"
-//	`include"parameters.h"
 	//inputs
 	instr, zero_flag,//instruction code from hex file
 	//outputs

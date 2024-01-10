@@ -1,6 +1,7 @@
 `timescale 1ns/100ps
 
 module reg_f #(
+    parameter PC_WIDTH = 5,
     parameter WIDTH = 8,
     parameter SIZE = 11
 )(
@@ -11,26 +12,24 @@ module reg_f #(
     rf_data_out2,
     rf_addr_wr,
     rf_data_we,
-    rf_data_in,
+    rf_data_in, 
 
     //Stack interface
     rf_stack_push,
     rf_stack_pop,
-	rf_stack_pointer,
+    rf_stack_pointer,
     rf_acc_zero
 );
-
-input clk;
 input [$clog2(SIZE)-1:0] rf_addr_r1;
 input [$clog2(SIZE)-1:0] rf_addr_r2;
 input [$clog2(SIZE)-1:0] rf_addr_wr;
 input rf_data_we;
 input [WIDTH-1:0] rf_data_in;
-
+input clk;
 //Stack interface
 input rf_stack_pop;
 input rf_stack_push;
-input [5:0] rf_stack_pointer;
+input [PC_WIDTH - 1:0] rf_stack_pointer;
 
 output [WIDTH-1:0] rf_data_out1;
 output [WIDTH-1:0] rf_data_out2;
@@ -50,8 +49,8 @@ reg [WIDTH-1:0] REG_FILE [SIZE-1:0];
 
 reg_f_stack stack(
     .clk(clk),
-	.addr(rf_stack_pointer),
-	.wren(rf_stack_push),
+    .addr(rf_stack_pointer),
+    .wren(rf_stack_push),
     .reg1_data(REG_FILE[2]),
     .reg2_data(REG_FILE[3]),
     .reg3_data(REG_FILE[4]),
@@ -73,7 +72,6 @@ reg_f_stack stack(
 );
 
 integer i;
-
 initial begin
 	REG_FILE[0] = {WIDTH{1'b0}};
 	REG_FILE[1] = {WIDTH{1'b1}}; 

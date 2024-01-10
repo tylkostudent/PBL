@@ -1,6 +1,5 @@
 `default_nettype none
 
-
 module MEMORY (pc, instruction);
     parameter INSTRUCTION_WIDTH = 40;
     parameter PC_WIDTH = 5;

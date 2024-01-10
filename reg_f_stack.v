@@ -13,7 +13,7 @@ module reg_f_stack #(
     reg5_data,
     reg6_data,
     reg7_data,
-    reg8_data,
+    reg8_data, 
     reg9_data,
     stack1_out,
     stack2_out,
