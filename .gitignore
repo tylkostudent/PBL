@@ -1,7 +1,7 @@
-sim_files/
 *.vcd
 *.gtkw
 .nvim/
+
 *.bak
 *.kpt
 *.tdf
@@ -10,6 +10,7 @@ sim_files/
 *.vcd
 *_sim
 c5_pin_model_dump.txt
+*.gtkw
 
 db/
 greybox_tmp/

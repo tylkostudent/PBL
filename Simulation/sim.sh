@@ -5,7 +5,6 @@ python3  ../scripts/hex_generator.py ../scripts/opcode_list.txt ../scripts/instr
 
 #Compilation
 rm -f ./Output/sim.vcd
-rm -f ./Output/sim
 
 modules_dir="../Modules"
 modules_list=""
@@ -37,4 +36,6 @@ if [ $? -ne 0 ]; then
     echo Running simulation failure
     exit 1
 fi
+
+rm -f ./Output/sim
 
