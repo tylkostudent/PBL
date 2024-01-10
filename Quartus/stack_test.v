@@ -1,3 +1,6 @@
+//STACK TEST
+//Author: Paweł Orszulik
+
 module stack_test(
 	clk,
 	wren,

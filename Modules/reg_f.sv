@@ -1,3 +1,9 @@
+//Register File
+//R0 - constant 8'h00
+//R1 - constant 8'hFF
+//R2 - accumulator(ACC)
+//Author: Paweł Orszulik 
+
 `timescale 1ns/100ps
 
 module reg_f #(

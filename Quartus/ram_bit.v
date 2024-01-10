@@ -1,3 +1,6 @@
+//IP Core RAM 2-Port MLAB
+//Author: Paweł Orszulik
+
 module ram_bit #(
     parameter AWIDTH = 8
 ) (

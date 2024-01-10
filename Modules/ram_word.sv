@@ -1,5 +1,7 @@
-`timescale 1ns/100ps
 //Models the IP Core RAM 2-Port MLAB used in Quartus
+//Author: Paweł Orszulik
+
+`timescale 1ns/100ps
 
 module ram_word #(
     parameter WIDTH = 8,

@@ -1,5 +1,7 @@
-`timescale 1ns/100ps
 //Models the IP Core RAM 1-Port used in Quartus
+//Author: Paweł Orszulik 
+
+`timescale 1ns/100ps
 
 module stack_8bit #(
 	parameter WIDTH = 8,

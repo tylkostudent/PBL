@@ -1,3 +1,6 @@
+//Hexadecimal to 7 seg transcoder
+//Author: Paweł Orszulik
+
 `timescale 1ns/100ps
 
 module led_disp (

@@ -1,3 +1,9 @@
+//Register File Stack
+//Implements stack used by reg_f.sv
+//Uses stack implemented by Intel IP Core RAM 
+//Author: Paweł Orszulik 
+
+
 module reg_f_stack #(
     parameter WIDTH = 8
 )(

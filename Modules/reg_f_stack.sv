@@ -1,3 +1,7 @@
+//Register File Stack
+//Implements stack used by reg_f.sv
+//Author: Paweł Orszulik 
+
 `timescale 1ns/100ps
 
 module reg_f_stack #(

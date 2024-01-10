@@ -1,4 +1,5 @@
 //Tests reg_F stack functionality - for Intel Quartus FPGA only
+//Author: Paweł Orszulik
 
 module reg_f_test(
     clk,

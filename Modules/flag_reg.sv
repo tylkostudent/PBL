@@ -1,3 +1,7 @@
+//Flag register
+//Holds the Zero, Carry and Borrow flags
+//Author: Paweł Orszulik
+
 `timescale 1ns/100ps
 
 module flag_reg (

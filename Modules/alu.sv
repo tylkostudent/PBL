@@ -1,3 +1,6 @@
+//Arithmetic Logic Unit (ALU)
+//Author: Paweł Orszulik
+
 `timescale 1ns/100ps
 
 module alu #(
