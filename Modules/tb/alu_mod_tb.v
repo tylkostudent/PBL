@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module alu_mod_tb;
     reg clk, rst;
     reg [7:0] op_code;
@@ -46,7 +48,7 @@ module alu_mod_tb;
 	end
 
 	initial begin
-		$dumpfile("sim.vcd");
+		$dumpfile("./Output/sim.vcd");
 		$dumpvars(0, alu_mod_tb);
 		$dumpon;
 	end

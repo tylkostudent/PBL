@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module decoder#(
 	parameter PC_WIDTH = 5,
 	parameter INSTR_ADDR_SIZE = 5,

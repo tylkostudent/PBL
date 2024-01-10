@@ -1,5 +1,8 @@
+`timescale 1ns/100ps
+
 `include"instructions.sv"
 `define STACK_MOD
+
 module control_module (
 	//inputs 
 	clk, rst, zero_flag,

@@ -1,4 +1,5 @@
-`timescale 1ns/1ps
+`timescale 1ns/100ps
+
 module stack (clock, call, ret, reset, called_from, return_to);
    input call;
    input ret;

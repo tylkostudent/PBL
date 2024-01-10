@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module pc#(
     parameter INSTR_ADDR_SIZE = 5
 ) (

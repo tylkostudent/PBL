@@ -62,121 +62,122 @@ end
 
 always @(*) begin
     case(op_code)
-        `AND: begin 
+        8'h00: begin //AND
             alu_out = in_a & in_b; 
             alu_flag_valid = 1'b0;
         end
 
-        `ANDN: begin 
+        8'h01: begin //ANDN 
             alu_out = ~(in_a & in_b);
             alu_flag_valid = 1'b0;
         end
 
-        `OR: begin 
+        8'h02: begin //OR 
             alu_out = in_a | in_b;
             alu_flag_valid = 1'b0;
         end
 
-        `ORN: begin
+        8'h03: begin //ORN
             alu_out = ~(in_a | in_b);
             alu_flag_valid = 1'b0;
         end
 
-        `XOR: begin
+        8'h04: begin //XOR
             alu_out = in_a ^ in_b;
             alu_flag_valid = 1'b0;
         end
 
-        `XORN: begin
+        8'h05: begin //XORN
             alu_out = ~(in_a ^ in_b); 
             alu_flag_valid = 1'b0;
         end
 
-        `NOT: begin
+        8'h06: begin //NOT
             alu_out = ~in_a; 
             alu_flag_valid = 1'b0;
         end
 
-        `ADD: begin
+        8'h07: begin //ADD
             {alu_c_out, alu_out} = in_a + in_b + alu_c_in; 
             alu_flag_valid = 1'b1;
         end
 
-        `SUB: begin
+        8'h08: begin //SUB
             {alu_b_out, alu_out} = in_a - in_b - alu_b_in;
             alu_flag_valid = 1'b1;
         end
 
-        `MUL: begin alu_out = in_a * in_b;
+        8'h09: begin //MUL
+            alu_out = in_a * in_b;
             alu_flag_valid = 1'b0;
         end
 
-        `DIV: begin
+        8'h0A: begin //DIV
             alu_out = in_a / in_b; 
             alu_flag_valid = 1'b0;
         end
 
-        `MOD: begin 
+        8'h0B: begin //MOD
             alu_out = in_a % in_b; 
             alu_flag_valid = 1'b0;
         end
 
-        `GT: begin
+        8'h0C: begin //GT
             alu_out = (in_a > in_b) ? 8'hFF : 8'h00; 
             alu_flag_valid = 1'b0;
         end
 
-        `GE: begin
+        8'h0D: begin //GE
             alu_out = (in_a >= in_b) ? 8'hFF : 8'h00; 
             alu_flag_valid = 1'b0;
         end
 
-        `EQ: begin
+        8'h0E: begin //EQ
             alu_out = (in_a == in_b);
             alu_flag_valid = 1'b0;
         end
 
-        `NE: begin
+        8'h0F: begin //NE
             alu_out = ~(in_a == in_b); 
             alu_flag_valid = 1'b0;
         end
 
-        `LE: begin
+        8'h10: begin //LE
             alu_out = (in_a <= in_b) ? 8'hFF : 8'h00; 
             alu_flag_valid = 1'b0;
         end
 
-        `LT: begin
+        8'h11: begin //LT
             alu_out = (in_a < in_b) ? 8'hFF : 8'h00; 
             alu_flag_valid = 1'b0;
         end
 
-        `S: begin
+        8'h1B: begin //S
             alu_out = {WIDTH{1'b1}}; 
             alu_flag_valid = 1'b0;
         end
 
-        `R: begin
+        8'h1C: begin //R
             alu_out = {WIDTH{1'b0}};
             alu_flag_valid = 1'b0;
         end
 
-        `ST: begin
+        8'h1D: begin //ST
             alu_out = in_a; 
             alu_flag_valid = 1'b0;
         end
 
-        `STN: begin
+        8'h1E: begin //STN
             alu_out = ~in_a;
             alu_flag_valid = 1'b0;
         end 
 
-        `LD: begin
+        8'h1F: begin //LD
             alu_out = in_a;
             alu_flag_valid = 1'b0;
         end
 
-        `LDN: begin
+        8'h20: begin //LDN
             alu_out = ~in_a; 
             alu_flag_valid = 1'b0;
         end

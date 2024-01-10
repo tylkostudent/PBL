@@ -1,8 +1,7 @@
-`timescale 1 ns / 100 ps
+`timescale 1ns/100ps
 //Models the IP Core RAM 2-Port MLAB used in Quartus
 
-module ram_word #(
-    parameter WIDTH = 8,
+module ram_bit #(
     parameter AWIDTH = 8
 ) (
     clk,
@@ -19,16 +18,16 @@ module ram_word #(
 
 input clk;
 input [AWIDTH-1:0] port_a_address;
-output [WIDTH-1:0] port_a_out;
+output port_a_out;
 
 input [AWIDTH-1:0] port_b_address;
-output [WIDTH-1:0] port_b_out;
+output port_b_out;
 
 input [AWIDTH-1:0] port_c_address;
-input [WIDTH-1:0] port_c_data;
+input port_c_data;
 input port_c_we;
 
-reg [WIDTH-1:0] MEM [(2**AWIDTH)-1:0];
+reg MEM [(2**AWIDTH)-1:0];
 
 always @(posedge clk) begin
 	 if(port_c_we) begin

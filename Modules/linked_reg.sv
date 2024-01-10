@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module linked_reg#(
 	parameter PC_SIZE = 5
 )(

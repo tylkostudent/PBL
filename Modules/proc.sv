@@ -1,4 +1,6 @@
-`include"instructions.sv"
+`timescale 1ns/100ps
+`include "instructions.sv"
+
 module proc(
 	input clk, rst,
 	output zero_flag,

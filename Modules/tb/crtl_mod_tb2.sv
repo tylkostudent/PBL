@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module crtl_mod_tb2;
 	`include"instructions.sv"
 	reg clk, rst, zero_flag;
@@ -46,7 +48,7 @@ module crtl_mod_tb2;
 	end
 
 	initial begin
-		$dumpfile("sim.vcd");
+		$dumpfile("./Output/sim.vcd");
 		$dumpvars(0, crtl_mod_tb2);
 		$dumpon;
 	end

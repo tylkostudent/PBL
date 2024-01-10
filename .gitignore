@@ -2,3 +2,17 @@ sim_files/
 *.vcd
 *.gtkw
 .nvim/
+*.bak
+*.kpt
+*.tdf
+*.hdb
+*.cdb
+*.vcd
+*_sim
+c5_pin_model_dump.txt
+
+db/
+greybox_tmp/
+incremental_db/
+output_files/
+simulation/

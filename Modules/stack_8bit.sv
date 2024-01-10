@@ -1,4 +1,4 @@
-`timescale 1 ns / 100 ps
+`timescale 1ns/100ps
 //Models the IP Core RAM 1-Port used in Quartus
 
 module stack_8bit #(

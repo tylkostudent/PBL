@@ -1,3 +1,4 @@
+`timescale 1ns/100ps
 `default_nettype none
 
 module MEMORY (pc, instruction);

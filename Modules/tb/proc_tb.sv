@@ -1,5 +1,8 @@
+`timescale 1ns/100ps
+`include "instructions.sv" 
+
 module proc_tb;
-`include"instructions.sv" 
+
 reg rst, clk;
 wire [OPCODE_WIDTH - 1:0]op_code;
 wire [VALUE_WIDTH - 1:0] alu_out;
@@ -32,7 +35,7 @@ proc u_proc(
     end
 
     initial begin
-	    $dumpfile("sim.vcd");
+	    $dumpfile("./Output/sim.vcd");
 	    $dumpvars(0, proc_tb);
 	    $dumpon;
     end

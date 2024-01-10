@@ -1,4 +1,6 @@
-module alu_mod#(
+`timescale 1ns/100ps
+
+module alu_mod #(
 	parameter WIDTH = 8,
 	parameter IWIDTH = 8,
 	parameter SOURCES = 4,
@@ -16,7 +18,7 @@ module alu_mod#(
 	input [1:0] dest_choice;
 	input clk, push, pop, rst;
 	input [IWIDTH-1:0] op_code; 
-	input [IWIDTH - 1:0]source1, source2;
+	input [WIDTH-1:0]source1, source2;
 	input [$clog2(SOURCES)-1:0] source1_choice;
 	wire bit_mem_a;
 	wire [WIDTH-1:0] word_mem_a;
