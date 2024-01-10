@@ -1,86 +1,99 @@
+//OBSOLETE!!!
 module alu_test #(
     parameter WIDTH = 3,
 	 parameter AWIDTH = 2
 )
 (
-    CLK,
-	 A_ADDR,
-	 B_ADDR,
-	 C_ADDR,
-	 C_WE,
-	 C_IN,
-	 C_DIN,
-	 A_DATA_7,
-	 B_DATA_7,
-	 C_DATA_7,
-	 OUT_7,
-	 CARRY_OUT
+    clk,
+	a_addr,
+	b_addr,
+	c_addr,
+	c_we,
+	c_in,
+	c_din,
+	a_data_7,
+	b_data_7,
+	c_data_7,
+	out_7,
+	carry_out
 );
 
-input CLK, C_WE, C_IN;
-input [AWIDTH-1:0] A_ADDR;
-input [AWIDTH-1:0] B_ADDR;
-input [AWIDTH-1:0] C_ADDR;
-input [WIDTH-1:0] C_DIN;
+input clk, c_we, c_in;
+input [AWIDTH-1:0] a_addr;
+input [AWIDTH-1:0] b_addr;
+input [AWIDTH-1:0] c_addr;
+input [WIDTH-1:0] c_din;
 
-wire [WIDTH-1:0] A_DATA;
-wire [WIDTH-1:0] B_DATA;
-wire [WIDTH-1:0] C_DATA;
-wire [WIDTH-1:0] ALU_OUT;
+wire [WIDTH-1:0] a_data;
+wire [WIDTH-1:0] b_data;
+wire [WIDTH-1:0] c_data;
+wire [WIDTH-1:0] alu_out;
 
-output [6:0] A_DATA_7;
-output [6:0] B_DATA_7;
-output [6:0] C_DATA_7;
-output [6:0] OUT_7;
-output CARRY_OUT;
+output [6:0] a_data_7;
+output [6:0] b_data_7;
+output [6:0] c_data_7;
+output [6:0] out_7;
+output carry_out;
 
-assign C_DATA = (C_IN ? C_DIN : ALU_OUT);
+assign c_data = (c_in ? c_din : alu_out);
 
 ram_word #(.AWIDTH(AWIDTH),.WIDTH(WIDTH))
 ram_module (
-    .CLK(!CLK),
-    .PORT_A_ADDRESS(A_ADDR),
-    .PORT_A_OUT(A_DATA),
+    .clk(!clk),
+    .port_a_addressS(a_addr),
+    .port_a_out(a_data),
 
-    .PORT_B_ADDRESS(B_ADDR),
-    .PORT_B_OUT(B_DATA),
+    .port_b_address(b_addr),
+    .port_b_out(b_data),
 
-    .PORT_C_ADDRESS(C_ADDR),
-    .PORT_C_DATA(C_DATA),
-    .PORT_C_WE(!C_WE)
+    .port_c_address(c_addr),
+    .port_c_data(c_data),
+    .port_c_we(!c_we)
 );
 
 
 alu #(.DWIDTH(WIDTH))
 alu_module (
-    .IN_INSTR(4'h5),
-    .IN_A(A_DATA),
-    .IN_B(B_DATA),
-    .Cin(1'b0),
-    .Cout(CARRY_OUT),
-    .Bin(1'b0),
-    .Bout(),
-    .OUT(ALU_OUT)
+	.op_code(8'h05),
+
+    .source1_choice(2'b10),
+    .bit_mem_a(1'b0),
+    .word_mem_a(a_data),
+    .rf_a(8'h00),
+    .imm_a(8'h00), 
+
+    .source2_choice(2'b10),
+    .bit_mem_b(1'b0),
+    .word_mem_b(b_data),
+    .rf_b(8'h00),
+    .imm_b(8'h00),
+
+    .alu_c_in(1'b0),
+    .alu_b_in(1'b0),
+    .alu_c_out(carry_out),
+    .alu_b_out(),
+    .alu_flag_valid(),
+    .alu_out(alu_out)
 );
 
 led_disp tr1(
-	.IN_BCD({1'b0, A_DATA}),
-	.OUT_7SEG(A_DATA_7)
+	.in({1'b0, a_data}),
+	.out(a_data_7)
 );
 
 led_disp tr2(
-	.IN_BCD({1'b0, B_DATA}),
-	.OUT_7SEG(B_DATA_7)
+	.in({1'b0, b_data}),
+	.out(b_data_7)
 );
 
 led_disp tr3(
-	.IN_BCD({1'b0, C_DATA}),
-	.OUT_7SEG(C_DATA_7)
+	.in({1'b0, c_data}),
+	.out(c_data_7)
 );
 
 led_disp tr4(
-	.IN_BCD({1'b0, ALU_OUT}),
-	.OUT_7SEG(OUT_7)
+	.in({1'b0, alu_out}),
+	.out(out_7)
 );
 
 endmodule

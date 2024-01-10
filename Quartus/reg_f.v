@@ -14,7 +14,7 @@ module reg_f #(
     //Stack interface
     rf_stack_push,
     rf_stack_pop,
-	 rf_stack_pointer,
+	rf_stack_pointer,
     rf_acc_zero
 );
 

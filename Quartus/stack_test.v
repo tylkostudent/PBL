@@ -27,14 +27,14 @@ stack_8bit UUT(
 );
 
 
-BCD_TO_7SEG tr1(
-	.IN_BCD(q[3:0]),
-	.OUT_7SEG(q1)
+led_disp tr1(
+	.in(q[3:0]),
+	.out(q1)
 );
 
-BCD_TO_7SEG tr2(
-	.IN_BCD(q[7:4]),
-	.OUT_7SEG(q2)
+led_disp tr2(
+	.in(q[7:4]),
+	.out(q2)
 );
 
 
