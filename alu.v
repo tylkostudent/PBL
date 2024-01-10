@@ -23,6 +23,7 @@ module alu #(
     alu_b_in,
     alu_c_out,
     alu_b_out,
+    alu_flag_valid,
     alu_out
 );
 
@@ -48,6 +49,7 @@ input alu_b_in;
 output reg [WIDTH-1:0] alu_out;
 output reg alu_c_out;
 output reg alu_b_out;
+output reg alu_flag_valid;
 
 assign in_a = (source1_choice[1] ? (source1_choice[0] ? imm_a : word_mem_a) : (source1_choice[0] ? bit_mem_a : rf_a));
 assign in_b = (source2_choice[1] ? (source2_choice[0] ? imm_b : word_mem_b) : (source2_choice[0] ? bit_mem_b : rf_b));
@@ -55,35 +57,134 @@ assign in_b = (source2_choice[1] ? (source2_choice[0] ? imm_b : word_mem_b) : (s
 initial begin
     alu_c_out = 1'b0;
     alu_b_out = 1'b0;
+    alu_flag_valid = 1'b0;
 end
 
 always @(*) begin
     case(op_code)
-        8'h00: alu_out = in_a & in_b; //AND
-        8'h01: alu_out = ~(in_a & in_b);//ANDN
-        8'h02: alu_out = in_a | in_b; //OR
-        8'h03: alu_out = ~(in_a | in_b); //ORN
-        8'h04: alu_out = in_a ^ in_b; //XOR
-        8'h05: alu_out = ~(in_a ^ in_b); //XORN
-        8'h06: alu_out = ~in_a; //NOT
-        8'h07: {alu_c_out, alu_out} = in_a + in_b + alu_c_in; //ADD
-        8'h08: {alu_b_out, alu_out} = in_a - in_b - alu_b_in; //SUB
-        8'h09: alu_out = in_a * in_b; //MUL
-        8'h0A: alu_out = in_a / in_b; //DIV
-        8'h0B: alu_out = in_a % in_b; //MOD
-        8'h0C: alu_out = (in_a > in_b) ? 8'hFF : 8'h00; //GT
-        8'h0D: alu_out = (in_a >= in_b) ? 8'hFF : 8'h00; //GE
-        8'h0E: alu_out = (in_a == in_b);  //EQ
-        8'h0F: alu_out = ~(in_a == in_b); //NE
-        8'h10: alu_out = (in_a <= in_b) ? 8'hFF : 8'h00; //LE
-        8'h11: alu_out = (in_a < in_b) ? 8'hFF : 8'h00; //LT
-        8'h1B: alu_out = {WIDTH{1'b1}}; //S
-        8'h1C: alu_out = {WIDTH{1'b0}}; //R
-        8'h1D: alu_out = in_a; //ST
-        8'h1E: alu_out = ~in_a; //STN
-        8'h1F: alu_out = in_a; //LD
-        8'h20: alu_out = ~in_a; //LDN
-        default: alu_out = in_a;
+        `AND: begin 
+            alu_out = in_a & in_b; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `ANDN: begin 
+            alu_out = ~(in_a & in_b);
+            alu_flag_valid = 1'b0;
+        end
+
+        `OR: begin 
+            alu_out = in_a | in_b;
+            alu_flag_valid = 1'b0;
+        end
+
+        `ORN: begin
+            alu_out = ~(in_a | in_b);
+            alu_flag_valid = 1'b0;
+        end
+
+        `XOR: begin
+            alu_out = in_a ^ in_b;
+            alu_flag_valid = 1'b0;
+        end
+
+        `XORN: begin
+            alu_out = ~(in_a ^ in_b); 
+            alu_flag_valid = 1'b0;
+        end
+
+        `NOT: begin
+            alu_out = ~in_a; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `ADD: begin
+            {alu_c_out, alu_out} = in_a + in_b + alu_c_in; 
+            alu_flag_valid = 1'b1;
+        end
+
+        `SUB: begin
+            {alu_b_out, alu_out} = in_a - in_b - alu_b_in;
+            alu_flag_valid = 1'b1;
+        end
+
+        `MUL: begin alu_out = in_a * in_b;
+            alu_flag_valid = 1'b0;
+        end
+
+        `DIV: begin
+            alu_out = in_a / in_b; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `MOD: begin 
+            alu_out = in_a % in_b; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `GT: begin
+            alu_out = (in_a > in_b) ? 8'hFF : 8'h00; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `GE: begin
+            alu_out = (in_a >= in_b) ? 8'hFF : 8'h00; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `EQ: begin
+            alu_out = (in_a == in_b);
+            alu_flag_valid = 1'b0;
+        end
+
+        `NE: begin
+            alu_out = ~(in_a == in_b); 
+            alu_flag_valid = 1'b0;
+        end
+
+        `LE: begin
+            alu_out = (in_a <= in_b) ? 8'hFF : 8'h00; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `LT: begin
+            alu_out = (in_a < in_b) ? 8'hFF : 8'h00; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `S: begin
+            alu_out = {WIDTH{1'b1}}; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `R: begin
+            alu_out = {WIDTH{1'b0}};
+            alu_flag_valid = 1'b0;
+        end
+
+        `ST: begin
+            alu_out = in_a; 
+            alu_flag_valid = 1'b0;
+        end
+
+        `STN: begin
+            alu_out = ~in_a;
+            alu_flag_valid = 1'b0;
+        end 
+
+        `LD: begin
+            alu_out = in_a;
+            alu_flag_valid = 1'b0;
+        end
+
+        `LDN: begin
+            alu_out = ~in_a; 
+            alu_flag_valid = 1'b0;
+        end
+
+        default: begin 
+            alu_out = in_a;
+            alu_flag_valid = 1'b0;
+        end
     endcase
 end
 

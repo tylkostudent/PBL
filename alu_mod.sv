@@ -33,6 +33,7 @@ module alu_mod#(
 	output [WIDTH-1:0] alu_out;
 	wire alu_c_out;
 	wire alu_b_out;
+    wire alu_flag_reg_valid;
 
 	wire f_zero;
 	output zero_flag;
@@ -65,12 +66,14 @@ alu(
     .alu_b_in(alu_b_in),
     .alu_c_out(alu_c_out),
     .alu_b_out(alu_b_out),
+    .alu_flag_valid(alu_flag_reg_valid),
     .alu_out(alu_out)   
 );
 
 flag_reg flag_reg(
     .clk(clk),
     .flag_rst(rst),
+    .flag_cb_valid(alu_flag_reg_valid),
     .flag_c_in(alu_c_out),
     .flag_z_in(f_zero),
     .flag_b_in(alu_b_out),
