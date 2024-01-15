@@ -121,7 +121,7 @@ end
 
 assign rf_data_out1 = REG_FILE[rf_addr_r1];
 assign rf_data_out2 = REG_FILE[rf_addr_r2];
-assign rf_acc_zero = (((REG_FILE[2] == 8'h00) || ((rf_addr_wr == {{$clog2(SIZE)-2{1'b0}},2'b10} && rf_data_we))) ? 1'b1 : 1'b0); 
+assign rf_acc_zero = ((((rf_addr_wr == {{$clog2(SIZE)-2{1'b0}},2'b10} && rf_data_we))) ? 1'b1 : 1'b0); 
 //^^ Zero flag activation: If in ACC already is 8'h00 
 // or if the data comming to ACC is equal to 8'h00 and the write enable is active. 
 // The second check is made in order to set the Z flag earlier - this avoids the need to wait 
