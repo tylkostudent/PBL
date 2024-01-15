@@ -7,7 +7,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #Hex generation
-python3  ../scripts/hex_generator.py ../scripts/opcode_list.txt ../scripts/instruction_list.txt hex.hex
+python3  ../scripts/hexgenerator.py ../scripts/opcode_list.txt ../scripts/instruction_list.txt hex.hex
 
 #Compilation
 rm -f ./Output/sim.vcd
