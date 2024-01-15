@@ -45,14 +45,14 @@ module decoder#(
 	assign jmp_addr = source1[PC_WIDTH - 1:0]; 
 	
 	assign {push, pop, jmp, cal, ret} = (op_code == JMP) ? 5'b00100 :
-				(op_code == IF0JUMP & zero_flag == 1'b0) ? 5'b00100 :
-				(op_code == IF1JUMP & zero_flag == 1'b1) ? 5'b00100 :
+				(op_code == IF0JUMP & zero_flag == 1'b1) ? 5'b00100 :
+				(op_code == IF1JUMP & zero_flag == 1'b0) ? 5'b00100 :
 									   (op_code == CALL) ? 5'b10110 : 
-				   (op_code == CAL0 & zero_flag == 1'b0) ? 5'b10110 :
-				   (op_code == CAL1 & zero_flag == 1'b1) ? 5'b10110 :
+				   (op_code == CAL0 & zero_flag == 1'b1) ? 5'b10110 :
+				   (op_code == CAL1 & zero_flag == 1'b0) ? 5'b10110 :
 									    (op_code == RET) ? 5'b01001 :
-				   (op_code == RET0 & zero_flag == 1'b0) ? 5'b01001 :
-				   (op_code == RET1 & zero_flag == 1'b1) ? 5'b01001 :
+				   (op_code == RET0 & zero_flag == 1'b1) ? 5'b01001 :
+				   (op_code == RET1 & zero_flag == 1'b0) ? 5'b01001 :
 														   5'b00000 ;	
 
 	/*
