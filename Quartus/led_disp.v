@@ -1,8 +1,6 @@
 //Hexadecimal to 7 seg transcoder
 //Author: Paweł Orszulik
 
-`timescale 1ns/100ps
-
 module led_disp (
 	input[3:0] in,
 	output reg[6:0] out
@@ -20,12 +18,12 @@ module led_disp (
 		4'h7: out = 7'b0001101;
 		4'h8: out = 7'b0000000;
 		4'h9: out = 7'b0000100;
-        4'hA: out = 7'b0001000;
-        4'hB: out = 7'b1100000;
-        4'hC: out = 7'b0110001;
-        4'hD: out = 7'b1000010;
-        4'hE: out = 7'b0110000;
-        4'hF: out = 7'b0111000;
+      4'hA: out = 7'b0001000;
+      4'hB: out = 7'b1100000;
+      4'hC: out = 7'b0110001;
+      4'hD: out = 7'b1000010;
+      4'hE: out = 7'b0110000;
+      4'hF: out = 7'b0111000;
 		default: out = 7'b0000001;
 	endcase
 	
