@@ -11,13 +11,16 @@ module proc(
 	output [VALUE_WIDTH - 1:0] dest_addr,
 	output [1:0] source1_choice, source2_choice, dest_choice
 );
-wire push, pop, zero_flag;
+wire push, pop, zero_flag_wire;
+
+assign zero_flag = zero_flag_wire;
+
 wire [PC_WIDTH - 1:0] instr_addr;
 control_module control_module(
 	//inputs 
 	.clk(clk), 
 	.rst(rst), 
-	.zero_flag(zero_flag),
+	.zero_flag(zero_flag_wire),
 	//outputs
 	.op_code(op_code),
 	.source1(source1_addr), 
@@ -53,6 +56,6 @@ alu_mod#(
 	.rst(rst),
 	//outputs
 	.alu_out(alu_out), 
-	.zero_flag(zero_flag) 
+	.zero_flag(zero_flag_wire) 
 );
 endmodule

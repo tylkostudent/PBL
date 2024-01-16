@@ -6,7 +6,7 @@ module alu_test #(
 	 parameter AWIDTH = 2
 )
 (
-    clk,
+   clk,
 	a_addr,
 	b_addr,
 	c_addr,
@@ -42,7 +42,7 @@ assign c_data = (c_in ? c_din : alu_out);
 ram_word #(.AWIDTH(AWIDTH),.WIDTH(WIDTH))
 ram_module (
     .clk(!clk),
-    .port_a_addressS(a_addr),
+    .port_a_address(a_addr),
     .port_a_out(a_data),
 
     .port_b_address(b_addr),
@@ -54,9 +54,8 @@ ram_module (
 );
 
 
-alu #(.DWIDTH(WIDTH))
-alu_module (
-	.op_code(8'h05),
+alu alu_module (
+	.op_code(8'h07),
 
     .source1_choice(2'b10),
     .bit_mem_a(1'b0),

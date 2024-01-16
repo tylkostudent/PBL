@@ -1,0 +1,92 @@
+set_location_assignment PIN_AA14 -to clk
+set_location_assignment PIN_AE12 -to a_addr[1]
+set_location_assignment PIN_AD10 -to a_addr[0]
+set_location_assignment PIN_AC9 -to b_addr[1]
+set_location_assignment PIN_AE11 -to b_addr[0]
+set_location_assignment PIN_AD12 -to c_addr[1]
+set_location_assignment PIN_AD11 -to c_addr[0]
+set_location_assignment PIN_Y16 -to c_we
+set_location_assignment PIN_AF9 -to c_din[2]
+set_location_assignment PIN_AC12 -to c_din[1]
+set_location_assignment PIN_AB12 -to c_din[0]
+set_location_assignment PIN_V25 -to a_data_7[6]
+set_location_assignment PIN_AA28 -to a_data_7[5]
+set_location_assignment PIN_Y27 -to a_data_7[4]
+set_location_assignment PIN_AB27 -to a_data_7[3]
+set_location_assignment PIN_AB26 -to a_data_7[2]
+set_location_assignment PIN_AA26 -to a_data_7[1]
+set_location_assignment PIN_AA25 -to a_data_7[0]
+set_location_assignment PIN_AA24 -to b_data_7[6]
+set_location_assignment PIN_Y24 -to b_data_7[4]
+set_location_assignment PIN_Y23 -to b_data_7[5]
+set_location_assignment PIN_W22 -to b_data_7[3]
+set_location_assignment PIN_W24 -to b_data_7[2]
+set_location_assignment PIN_V23 -to b_data_7[1]
+set_location_assignment PIN_W25 -to b_data_7[0]
+set_location_assignment PIN_AD26 -to c_data_7[6]
+set_location_assignment PIN_AC27 -to c_data_7[5]
+set_location_assignment PIN_AD25 -to c_data_7[4]
+set_location_assignment PIN_AC25 -to c_data_7[3]
+set_location_assignment PIN_AB28 -to c_data_7[2]
+set_location_assignment PIN_AB25 -to c_data_7[1]
+set_location_assignment PIN_AB22 -to c_data_7[0]
+set_location_assignment PIN_AE26 -to out_7[6]
+set_location_assignment PIN_AE27 -to out_7[5]
+set_location_assignment PIN_AE28 -to out_7[4]
+set_location_assignment PIN_AG27 -to out_7[3]
+set_location_assignment PIN_AF28 -to out_7[2]
+set_location_assignment PIN_AG28 -to out_7[1]
+set_location_assignment PIN_AH28 -to out_7[0]
+set_location_assignment PIN_V16 -to carry_out
+set_location_assignment PIN_AF10 -to c_in
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEMA5F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY alu_test
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 22.1STD.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:15:49  GRUDNIA 11, 2023"
+set_global_assignment -name LAST_QUARTUS_VERSION "22.1std.0 Standard Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (Verilog)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VERILOG_FILE stack_8bit.v
+set_global_assignment -name SYSTEMVERILOG_FILE ../Modules/reg_f.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../Modules/alu.sv
+set_global_assignment -name VERILOG_FILE stack_test.v
+set_global_assignment -name QIP_FILE stack_8bit.qip
+set_global_assignment -name IP_TOOL_NAME "RAM: 1-PORT" -qip stack_8bit.qip
+set_global_assignment -name IP_TOOL_VERSION 22.1 -qip stack_8bit.qip
+set_global_assignment -name IP_GENERATED_DEVICE_FAMILY "\{Cyclone V\}" -qip stack_8bit.qip
+set_global_assignment -name VERILOG_FILE stack_8bit.v -qip stack_8bit.qip
+set_global_assignment -name MISC_FILE stack_8bit_bb.v -qip stack_8bit.qip
+set_global_assignment -name VERILOG_FILE reg_f_test.v
+set_global_assignment -name VERILOG_FILE reg_f_stack.v
+set_global_assignment -name VERILOG_FILE led_disp.v
+set_global_assignment -name VERILOG_FILE ram_word.v
+set_global_assignment -name QIP_FILE ram_mlab.qip
+set_global_assignment -name IP_TOOL_NAME "RAM: 2-PORT" -qip ram_mlab.qip
+set_global_assignment -name IP_TOOL_VERSION 22.1 -qip ram_mlab.qip
+set_global_assignment -name IP_GENERATED_DEVICE_FAMILY "\{Cyclone V\}" -qip ram_mlab.qip
+set_global_assignment -name VERILOG_FILE ram_mlab.v -qip ram_mlab.qip
+set_global_assignment -name MISC_FILE ram_mlab_bb.v -qip ram_mlab.qip
+set_global_assignment -name VERILOG_FILE ram_bit.v
+set_global_assignment -name VERILOG_FILE alu_test.v
+set_global_assignment -name QIP_FILE ram_mlab_bit.qip
+set_global_assignment -name IP_TOOL_NAME "RAM: 2-PORT" -qip ram_mlab_bit.qip
+set_global_assignment -name IP_TOOL_VERSION 22.1 -qip ram_mlab_bit.qip
+set_global_assignment -name IP_GENERATED_DEVICE_FAMILY "\{Cyclone V\}" -qip ram_mlab_bit.qip
+set_global_assignment -name VERILOG_FILE ram_mlab_bit.v -qip ram_mlab_bit.qip
+set_global_assignment -name MISC_FILE ram_mlab_bit_bb.v -qip ram_mlab_bit.qip
