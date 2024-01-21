@@ -56,4 +56,4 @@ Source_choice / destination_choice table:
 
 ![Processor_schematic drawio](https://github.com/tylkostudent/PBL/assets/92595771/1bd06a28-bdaa-4e59-9b97-0def459166c3)
 Instruction:
-file:///home/lukas/Downloads/Instructions.png
+![Instructions](https://github.com/tylkostudent/PBL/assets/92595771/664ae416-33ba-4bcf-828a-521518de8dc3)
