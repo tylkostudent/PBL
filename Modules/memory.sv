@@ -19,6 +19,6 @@ initial
     `ifdef PBL
       $readmemh("pbl.hex", memory);
     `else
-      $readmemh("hex.hex", memory, 0, 29);
+      $readmemh("hex.hex", memory, 0, 6);
    `endif
 endmodule  

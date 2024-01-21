@@ -39,6 +39,8 @@ def decode_choices(choice: str, opcode_map: int) -> str:
         binary_str = "00" + decode_choice(choice[0]) + "00" + decode_choice(choice[1])
     if opcode_map == 5:
         binary_str = "00" + decode_choice(choice[0]) + decode_choice(choice[1]) + decode_choice(choice[2])
+    if opcode_map == 6:
+        binary_str = "000000" + decode_choice(choice[0])  
     decimal_number = int(binary_str, 2)
     hex_number = hex(decimal_number)[2:].zfill(2).upper()
     return hex_number 
@@ -54,11 +56,13 @@ def create_hex(opcode: Opcode) -> str:
         case 2:
             hex_str = opcode.value + "0000" + opcode.args[0] + decode_choices(opcode.args[1], opcode.arg_map)
         case 3:
-            hex_str = opcode.value + opcode.args[0] + "0000" + decode_choices(opcode.args[1], opcode.arg_map) 
+            hex_str = opcode.value + opcode.args[0] + "0002" + decode_choices(opcode.args[1], opcode.arg_map) 
         case 4:
             hex_str = opcode.value + opcode.args[0] + "00" + opcode.args[1] + decode_choices(opcode.args[2], opcode.arg_map) 
         case 5:
             hex_str = opcode.value + opcode.args[0] + opcode.args[1] + opcode.args[2] + decode_choices(opcode.args[3], opcode.arg_map) 
+        case 6:
+            hex_str = opcode.value + "0200" + opcode.args[0] + decode_choices(opcode.args[1], opcode.arg_map) 
     return hex_str
     
 

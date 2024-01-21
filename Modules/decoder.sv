@@ -3,7 +3,7 @@
 module decoder#(
 	parameter PC_WIDTH = 5,
 	parameter INSTR_ADDR_SIZE = 5,
-	parameter OPCODE_WIDTH = 5,
+	parameter OPCODE_WIDTH = 6,
 	parameter VALUE_WIDTH = 8,
 	parameter INSTRUCTION_WIDTH = 40
 )
@@ -34,7 +34,7 @@ module decoder#(
 	output [INSTR_ADDR_SIZE - 1:0] jmp_addr;
 	output reg push, pop, jmp, cal, ret;
 	
-	assign op_code = instr[36:32];
+	assign op_code = instr[37:32];
 	assign source1 = instr[31:24];
 	assign source2 = instr[23:16];
 	assign destination = instr[15:8];
