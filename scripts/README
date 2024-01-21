@@ -1,0 +1,51 @@
+# Assembly Instructions
+
+hexgenerator.py is an assembler for this cpu. 
+The script takes 3 arguments:
+
+opcode_list.txt are the names of operations and their value
+representations.
+
+instruction_list as in file named instruction_list: here we have
+separated by space instruction name (same as in opcode_list), and
+source_addr1, source_addr2, destination_addr (all in hexadecimal),
+
+last argument of script is path where hex file will be saved (just
+enter the name for a file and it will be created in current directory)
+
+There are different opcode types.
+0.  Takes no arguments.  RET, RET0, RET1
+1.  Takes 1 argument. JMP, IF0JMP, IF1JMP, CAL, CAL0, CAL1
+2.  SET, RST, ST,STN  
+3.  LD and LDN
+4.  NOT
+5 ALU.  takes two sources and a destination.
+
+last argument is choice of sources and destination 
+0 - 00
+1 - 01
+2 - 10
+3 - 11
+
+Basically it has a dictionary of opcode names to opcode objects.  The
+opcode object has the binary value of the opcode, the type, and a list
+of arguments.  The program reads the assembly instructions, converts
+them based on the type, and then spits out the machine code.
+
+It has several subroutines.
+
+read_opcodes: Reads the list of defined opcodes, and their conversions
+to binary. Creates the opcode map.
+
+read_instruction_file: Reads the program we want to compile, creates
+an opcode object, and converts it to a hex line.  Returns a list of
+hex lines.  Reuses the opcode objects with different arguments. 
+
+decode_choice: Converts one choice from decimal to binary.
+
+decode_choices: is the heart of the assembler.  Based on the choices
+selected, it generates a binary line.
+
+create_hex: Reads the opcode arguments and creates the hex file
+
+write_hex_file: Writes out the new program. 
