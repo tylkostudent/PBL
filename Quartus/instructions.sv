@@ -34,6 +34,7 @@ enum bit [OPCODE_WIDTH - 1:0] {
   ST   = 6'h1D,
   STN  = 6'h1E,
   LD   = 6'h1F,
-  LDN  = 6'h20
+  LDN  = 6'h20,
+  NOP  = 6'h21
 }opCodes;
 `endif
