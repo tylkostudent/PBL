@@ -1,18 +1,19 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sun Jan 21 17:55:06 2024
+[*] Sun Jan 21 20:23:29 2024
 [*]
 [dumpfile] "/home/lukas/Documents/studia/PBL/Simulation/Output/sim.vcd"
-[dumpfile_mtime] "Sun Jan 21 17:48:40 2024"
-[dumpfile_size] 32626
+[dumpfile_mtime] "Sun Jan 21 20:22:45 2024"
+[dumpfile_size] 23639
 [savefile] "/home/lukas/Documents/studia/PBL/Simulation/Output/proc.gtkw"
 [timestart] 0
 [size] 1920 1008
 [pos] -1 -1
-*-13.797078 10100 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-13.651208 11450 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] proc_tb.
 [treeopen] proc_tb.u_proc.
 [treeopen] proc_tb.u_proc.alu_mod.
+[treeopen] proc_tb.u_proc.alu_mod.reg_f.
 [treeopen] proc_tb.u_proc.control_module.
 [sst_width] 212
 [signals_width] 251
@@ -22,6 +23,7 @@
 proc_tb.clk
 proc_tb.u_proc.control_module.rst
 @22
+proc_tb.u_proc.control_module.instruction[39:0]
 proc_tb.u_proc.control_module.instr_addr[4:0]
 @2022
 ^1 /home/lukas/Documents/studia/PBL/Simulation/gtkwave_filter.txt
@@ -40,6 +42,10 @@ proc_tb.u_proc.control_module.decoder.source2_choice[1:0]
 proc_tb.u_proc.control_module.decoder.destination[7:0]
 @28
 proc_tb.u_proc.control_module.decoder.destination_choice[1:0]
+@22
+proc_tb.u_proc.alu_mod.alu.in_a[7:0]
+@23
+proc_tb.u_proc.alu_mod.alu.in_b[7:0]
 @22
 proc_tb.u_proc.alu_mod.alu_out[7:0]
 proc_tb.u_proc.alu_mod.reg_f.rf_addr_r1[3:0]
