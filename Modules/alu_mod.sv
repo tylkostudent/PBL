@@ -81,7 +81,7 @@ flag_reg flag_reg(
     .flag_b_in(alu_b_out),
     .flag_c(alu_c_in),
     .flag_z(zero_flag),
-    .flag_b(alu_b_out)
+    .flag_b(alu_b_in)
 );
 
 reg_f#(

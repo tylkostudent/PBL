@@ -75,7 +75,7 @@ always @(*) begin
         8'h01: begin //ANDN 
             alu_c_out = 1'b0;
             alu_b_out = 1'b0;
-            alu_out = ~(in_a & in_b);
+            alu_out = in_a & ~in_b;
             alu_flag_valid = 1'b0;
         end
 
@@ -89,7 +89,7 @@ always @(*) begin
         8'h03: begin //ORN
             alu_c_out = 1'b0;
             alu_b_out = 1'b0;
-            alu_out = ~(in_a | in_b);
+            alu_out = in_a | ~in_b;
             alu_flag_valid = 1'b0;
         end
 
@@ -103,7 +103,7 @@ always @(*) begin
         8'h05: begin //XORN
             alu_c_out = 1'b0;
             alu_b_out = 1'b0;
-            alu_out = ~(in_a ^ in_b); 
+            alu_out = in_a ^ ~in_b; 
             alu_flag_valid = 1'b0;
         end
 

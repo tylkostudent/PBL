@@ -1,6 +1,6 @@
 `timescale 1ns/100ps
 `include "instructions.sv" 
-`define SIMULATION //if define includes simulation only code dont delete it 
+//`define SIMULATION //if define includes simulation only code dont delete it 
 module proc_tb;
 
 reg rst, clk;
