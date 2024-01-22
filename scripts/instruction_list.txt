@@ -1,4 +1,5 @@
-SET 00 1 //start
+def start 09
+SET start 1 
 SET 01 1 //lamp 
 SET 02 1 //rst 
 SET 03 1 //stop
