@@ -1,6 +1,6 @@
 `timescale 1ns/100ps
 `include "instructions.sv" 
-//`define SIMULATION //if define includes simulation only code dont delete it 
+`define SIMULATION //if define includes simulation only code dont delete it 
 module proc_tb;
 
 reg rst, clk;
@@ -30,7 +30,7 @@ proc u_proc(
 	    rst = 1;
 	    #10
 	    rst = 0;
-	    #400
+	    #1000
 	    $finish;
     end
 

@@ -18,3 +18,4 @@ simulation/
 Simulation/Output/sim.vcd
 worktrees/*
 commit_msg
+old_instr.txt
