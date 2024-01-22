@@ -77,6 +77,13 @@ def read_instr_file(file_path: str, opcode_map: dict[str, Opcode]) -> list[str]:
     hex_lines: list[str] = []
     with open(file_path, 'r') as file:
         for line in file:
+            if line.startswith('//'):
+                print("omitting comment: ", line)
+                continue 
+            if line.isspace():
+                print("omitting empty line: ", line)
+                continue
+            print("line to compile:", line)
             #Allow comments on each line. 
             parts = line.split ("//")[0]
             #The next line splits on one or more spaces. 

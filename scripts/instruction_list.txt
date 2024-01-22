@@ -1,26 +1,46 @@
-def start 09
-SET start 1 
-SET 01 1 //lamp 
-SET 02 1 //rst 
-SET 03 1 //stop
-SET 04 1 //max
-RST 05 1 //motor 
-OR 11 00 00 302 //pressure
-OR 11 00 01 302
-OR 11 00 02 302
-OR 11 00 03 302
-LD 00 1 //load set 
-OR 02 01 01 011 //set lamp
-LDN 03 1
-ORN 02 04 02 010
-ST 03 0 
-LT 00 75 02 230 //if acc1 < acc2
-OR 03 02 02 000
-LD 02 1 //load rst
-ANDN 02 01 01 011 //reset lamp
-ST 04 0
-LD 05 3
-SET 05 1
-SUB 02 01 02 030 
-IF1JUMP 16 
-RST 05 1
+//  assemby code for PBL 
+//  compilator ommits empty lines  
+//  to comment line add "//" in front !!IMPORTANT!! NO SPACES BEFORE "//"
+// 	to add comment at the end of line add "//" followed by your comment
+//  use def keyword followed by name followed by value
+//  it works like defines in C so for example:
+//  def start 00
+//  AND start 00 02 300 
+//  start in AND operation will be replaced in compilation by 00 
+//////////////// explanation for current code /////////////////
+//  r_ prefix register addr 
+//  b_ prefix bit memory addr 
+//  w_ prefix word memory addr 
+//  i_ data_imidiate value in hex 
+/////////////////////// DEFINE SECTION ///////////////////////////////// 
+def b_start 	00 // mem bit addr 
+def b_stop  	01 // mem bit addr ~b_stop resets lamp and timer 
+def b_max   	02 // mem bit addr 
+def w_pressure 	00 // mem word addr 
+def i_75 		4B // data imidiate 75 
+def b_lamp 		03 // mem bit addr lamp 
+def r_acc		02 // reg addr of acc
+def r_rst       03 // reg addr where reset flag is store
+def r_pres_cond	04 // reg addr	
+def i_wait_time 02 // time in clk cycles to count
+def b_motor		04 // mem bit addr motor 
+def reg_0		00
+def reg_1		01
+/////////////////////// setting memory values ////////////////////////////////   
+SET  	b_start								1  
+SET  	b_stop 								1  
+SET  	b_max 								1
+SET  	b_motor								1
+OR 		reg_0		i_wait_time r_acc 		030		
+OR   	reg_1 		reg_1		w_pressure	002	 
+///////////////// simulation //////////////////////////////
+AND  	b_stop 		b_max 		r_rst 		110 
+NOT  	r_rst 		r_rst 					00 
+LT   	w_pressure 	i_75 		r_pres_cond 230
+OR   	r_rst 		r_pres_cond r_rst 		000
+OR   	b_lamp 		b_start 	b_lamp 		111 
+ANDN 	b_lamp		r_rst		b_lamp		101 
+SUB  	r_acc		b_lamp		r_acc		010
+IF1JUMP 06				
+SET 	b_motor								1
+JUMP 	06
