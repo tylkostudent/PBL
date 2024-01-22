@@ -1,3 +1,13 @@
-OR  01 00 03 301    //Load a 1 to address 2 in bitmemory 
-OR  04 00 05 302   //Load a 4 to address 5 in ram memory
-MUL 03 04 02 120  //Multiply bit memory by word memory 4, result in register 2
+OR 0A 00 00 302
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+ADD 01 00 00 322
+OR 00 00 02 200
+JUMP 0B 
