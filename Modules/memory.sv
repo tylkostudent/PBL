@@ -16,9 +16,11 @@ module MEMORY (pc, instruction);
 
    
 initial
-    `ifdef PBL
+/*    `ifdef PBL
       $readmemh("pbl.hex", memory);
     `else
-      $readmemh("hex.hex", memory, 0, 6);
+      $readmemh("hex.hex", memory, 0, 2);
    `endif
+   */
+      $readmemh("hex.hex", memory, 0, 2);
 endmodule  

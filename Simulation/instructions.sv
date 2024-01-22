@@ -1,7 +1,7 @@
 `ifndef INSTUCTIONS_H
 `define INSTUCTIONS_H
 `include"parameters.sv"
-enum bit [OPCODE_WIDTH - 1:0] {
+enum bit [6 - 1:0] {
   AND  = 6'h00,
   ANDN = 6'h01,
   OR   = 6'h02,

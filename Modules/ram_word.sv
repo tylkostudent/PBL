@@ -35,8 +35,14 @@ reg [WIDTH-1:0] MEM [(2**AWIDTH)-1:0];
 always @(posedge clk) begin
 	 if(port_c_we) begin
 		  MEM[port_c_address] <= port_c_data;
+`ifdef SIMULATION   
+`ifdef DEMO   
+    $display (port_c_address, "        ",port_c_data);
+`endif   
+`endif
 	 end
 end
+
 
 assign port_a_out = MEM[port_a_address];
 assign port_b_out = MEM[port_b_address];
