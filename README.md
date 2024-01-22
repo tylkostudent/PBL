@@ -9,6 +9,15 @@ TO add gtkwave_filter.txt as filter.
 -select op_code again, select data format, select translate filter file -> select and enable. 
 -choose fileter file and select gtkwave_filter.txt file
 
+Writing assemby:
+instructions names are specyfied in opcode_list.txt (opcode names differ dont use names from list in readme)  
+arguments that they take are specified below 
+now you can define names for values 
+for example:
+def start 00 
+will replace word start with 00 when generating hexfile (tested and working as expected)
+define names before you use them
+
 Instruction list:
 | op_code | Instruction  | arg1 (source1) 8bit | arg2(source2) 8 bits | arg3(destination) 8bits | 2 free bits | Source1_choice 2bits | Source2_choice 2bits | Destination_choice 2 bits |
 |---------|--------------|---------------------|----------------------|-------------------------|-------------|----------------------|----------------------|---------------------------|
