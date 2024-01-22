@@ -54,7 +54,18 @@ module decoder#(
 				   (op_code == RET0 & zero_flag == 1'b1) ? 5'b01001 :
 				   (op_code == RET1 & zero_flag == 1'b0) ? 5'b01001 :
 														   5'b00000 ;	
-
+	
+	`ifdef SIMULATION
+	initial $display("");
+   
+	initial #1 $display("\nop s1 1ch s2 dest dCh");
+   
+	initial $monitor("%h",op_code, " ",
+						 source1, " ",
+						 source1_choice, " ",
+						 source2, destination, "     ",
+						 destination_choice);
+	`endif
 	/*
 	always @(op_code)begin 
 		if (op_code == JMP)begin 

@@ -1,7 +1,3 @@
-LD FF 3  
-AND 02 01 00 002 
-STN 01 2 
-STN 02 2
-ANDN 01 02 03 222 
-OR 02 00 01 001    
-LD 01 1
+OR  01 00 03 301    //Load a 1 to address 2 in bitmemory 
+OR  04 00 05 302   //Load a 4 to address 5 in ram memory
+MUL 03 04 02 120  //Multiply bit memory by word memory 4, result in register 2

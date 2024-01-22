@@ -70,7 +70,10 @@ def read_instr_file(file_path: str, opcode_map: dict[str, Opcode]) -> list[str]:
     hex_lines: list[str] = []
     with open(file_path, 'r') as file:
         for line in file:
-            instr = line.strip().split(' ')
+            #Allow comments on each line. 
+            parts = line.split ("//")[0]
+            #The next line splits on one or more spaces. 
+            instr = parts.strip().split()
             opcode = opcode_map[instr[0]]
             opcode.args = instr[1:]
             hex_lines.append(create_hex(opcode))

@@ -1,3 +1,6 @@
+//`define PARAMETERS 1
+//`ifndef PARAMETERS
+
 parameter PC_WIDTH = 5;
 parameter REGISTER_WIDTH = 8;
 parameter NUMBER_OF_REGISTERS = 8;
@@ -12,3 +15,9 @@ parameter ADDR_WIDTH = 8;
 
 parameter TRUE   = 1'b1;
 parameter FALSE  = 1'b0;
+
+//DEFINE DEMO FOR A DEMO. 
+`define DEMO 1
+`define PBL 1
+
+//`endif
