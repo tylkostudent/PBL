@@ -13,34 +13,55 @@
 //  w_ prefix word memory addr 
 //  i_ data_imidiate value in hex 
 /////////////////////// DEFINE SECTION ///////////////////////////////// 
+def reg_0		00
+def reg_1		01
+def r_acc		02 // reg addr of acc
+def r_temp      03 // reg addr temp 
+
 def b_start 	00 // mem bit addr 
 def b_stop  	01 // mem bit addr ~b_stop resets lamp and timer 
 def b_max   	02 // mem bit addr 
-def w_pressure 	00 // mem word addr 
-def i_75 		4B // data imidiate 75 
 def b_lamp 		03 // mem bit addr lamp 
-def r_acc		02 // reg addr of acc
-def r_rst       03 // reg addr where reset flag is store
-def r_pres_cond	04 // reg addr	
-def i_wait_time 02 // time in clk cycles to count
 def b_motor		04 // mem bit addr motor 
-def reg_0		00
-def reg_1		01
-/////////////////////// setting memory values ////////////////////////////////   
-SET  	b_start								1  
-SET  	b_stop 								1  
-SET  	b_max 								1
-SET  	b_motor								1
-OR 		reg_0		i_wait_time r_acc 		030		
-OR   	reg_1 		reg_1		w_pressure	002	 
-///////////////// simulation //////////////////////////////
-AND  	b_stop 		b_max 		r_rst 		110 
-NOT  	r_rst 		r_rst 					00 
-LT   	w_pressure 	i_75 		r_pres_cond 230
-OR   	r_rst 		r_pres_cond r_rst 		000
-OR   	b_lamp 		b_start 	b_lamp 		111 
-ANDN 	b_lamp		r_rst		b_lamp		101 
-SUB  	r_acc		b_lamp		r_acc		010
-IF1JUMP 06				
-SET 	b_motor								1
-JUMP 	06
+
+def w_pressure 	00 // mem word addr 
+def w_timer     01 // timer register 
+def w_cnt 		02 // counter for counting down motor tests 
+
+def i_wait_time 02 // time in clk cycles to count
+def i_75 		4B // data imidiate 75 
+///////////////// setting memory values /////////////////
+SET  	b_start								1 		// 00 
+SET  	b_stop 								1  		// 01 
+SET  	b_max 								1		// 02 	
+RST  	b_motor								1  		// 03 
+OR 		reg_0		i_wait_time w_timer 	032		// 04 
+OR   	reg_1 		reg_1		w_pressure	002		// 05
+OR 		reg_0 		02 			w_timer		032 	// 06	
+OR 		reg_0 		03 			w_cnt		032		// 07 
+///////////////// simulation ////////////////////////////
+RST  	r_temp								0  		// 08  
+RST  	r_acc								0  		// 09 
+AND  	b_stop 		b_max 		r_acc 		110 	// 0A
+NOT  	r_acc 		r_acc 					00 		// 0B 
+LT   	w_pressure 	i_75 		r_temp 		230		// 0C 
+OR   	r_acc 		r_temp 		r_acc 		000		// 0D 
+OR   	b_lamp 		b_start 	b_lamp 		111 	// 0E 
+ANDN 	b_lamp		r_acc		b_lamp		101 	// 0F 
+LD 		b_lamp								1		// 10
+IF1JUMP 13 											// 11 
+OR 		reg_0		i_wait_time w_timer		032		// 12
+SUB  	w_timer		b_lamp		w_timer		212		// 13 
+LD 		w_timer								2		// 14 
+IF1JUMP 0A											// 15 
+SET 	b_motor								1		// 16
+///////////////// edge detection //////////////////////// 
+RST  	r_acc								0  		// 17 
+XOR 	b_motor		r_temp	    r_acc       100 	// 18 	
+OR 		reg_0 		b_motor		r_temp      010 	// 19
+AND  	b_motor 	r_acc 		r_acc 		100   	// 1A  	
+SUB 	w_cnt		r_acc		w_cnt		202 	// 1B
+OR 		reg_0		w_cnt		r_acc		020		// 1C 
+IF1JUMP	1F 											// 1D	
+SET 	b_max								1 		// 1E
+JUMP 	0A											// 1F
