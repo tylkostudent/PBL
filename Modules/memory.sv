@@ -2,8 +2,6 @@
 `default_nettype none
 
 module MEMORY (pc, instruction);
-    parameter INSTRUCTION_WIDTH = 40;
-    parameter PC_WIDTH = 5;
     input [PC_WIDTH - 1 : 0] pc;
     output reg [INSTRUCTION_WIDTH - 1 : 0] instruction;
     `ifdef PBL   
@@ -22,5 +20,5 @@ initial
       $readmemh("hex.hex", memory, 0, 2);
    `endif
    */
-      $readmemh("hex.hex", memory, 0, 32);
+      $readmemh("hex.hex", memory, 0, 39);
 endmodule  

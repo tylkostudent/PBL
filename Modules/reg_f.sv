@@ -7,7 +7,7 @@
 `timescale 1ns/100ps
 
 module reg_f #(
-    parameter PC_WIDTH = 5,
+    parameter PC_WIDTH = 6,
     parameter WIDTH = 8,
     parameter SIZE = 11
 )(

@@ -39,7 +39,7 @@ alu_mod#(
 	.IWIDTH(VALUE_WIDTH),
 	.SOURCES(4),
 	.ADDR_WIDTH(ADDR_WIDTH),
-	.PC_WIDTH(PC_WIDTH + 1)
+	.PC_WIDTH(PC_WIDTH)
 )alu_mod(
 	//inputs
 	.clk(clk), 
@@ -52,10 +52,12 @@ alu_mod#(
 	.dest_choice(dest_choice), 
 	.push(push),
 	.pop(pop), 
-	.instr_addr({1'b0, instr_addr}), 
+	.instr_addr(instr_addr), 
 	.rst(rst),
 	//outputs
 	.alu_out(alu_out), 
 	.zero_flag(zero_flag_wire) 
 );
+
+
 endmodule

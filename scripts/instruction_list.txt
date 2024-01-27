@@ -16,52 +16,64 @@
 def reg_0		00
 def reg_1		01
 def r_acc		02 // reg addr of acc
-def r_temp      03 // reg addr temp 
 
 def b_start 	00 // mem bit addr 
 def b_stop  	01 // mem bit addr ~b_stop resets lamp and timer 
 def b_max   	02 // mem bit addr 
 def b_lamp 		03 // mem bit addr lamp 
 def b_motor		04 // mem bit addr motor 
+def b_ack 		05 // ack motor started 3 times
 
 def w_pressure 	00 // mem word addr 
 def w_timer     01 // timer register 
 def w_cnt 		02 // counter for counting down motor tests 
-
+def w_temp      03 // addr temp 
+def w_pres_cond 04 // addr checking pressure condition
+def w_sub		05 // addr for substraction from timer  
+def w_sub2		06 // addr for substraction fron counter 
+def i_80		50 // data imidiate 80%
 def i_wait_time 02 // time in clk cycles to count
-def i_75 		4B // data imidiate 75 
+def i_75 		4B // data imidiate 75%
 ///////////////// setting memory values /////////////////
-SET  	b_start								1 		// 00 
-SET  	b_stop 								1  		// 01 
-SET  	b_max 								1		// 02 	
-RST  	b_motor								1  		// 03 
-OR 		reg_0		i_wait_time w_timer 	032		// 04 
-OR   	reg_1 		reg_1		w_pressure	002		// 05
-OR 		reg_0 		02 			w_timer		032 	// 06	
-OR 		reg_0 		03 			w_cnt		032		// 07 
-///////////////// simulation ////////////////////////////
-RST  	r_temp								0  		// 08  
-RST  	r_acc								0  		// 09 
-AND  	b_stop 		b_max 		r_acc 		110 	// 0A
-NOT  	r_acc 		r_acc 					00 		// 0B 
-LT   	w_pressure 	i_75 		r_temp 		230		// 0C 
-OR   	r_acc 		r_temp 		r_acc 		000		// 0D 
-OR   	b_lamp 		b_start 	b_lamp 		111 	// 0E 
-ANDN 	b_lamp		r_acc		b_lamp		101 	// 0F 
-LD 		b_lamp								1		// 10
-IF1JUMP 13 											// 11 
-OR 		reg_0		i_wait_time w_timer		032		// 12
-SUB  	w_timer		b_lamp		w_timer		212		// 13 
-LD 		w_timer								2		// 14 
-IF1JUMP 0A											// 15 
-SET 	b_motor								1		// 16
+RST 	b_ack 								1 		// 00 //set ack to 0 
+RST 	b_lamp								1 		// 01 //set initial lamp value to 0
+SET  	b_start								1 		// 02 //set start button to 1 
+SET  	b_stop 								1  		// 03 //set stop value to 1 (active state = 0)
+SET  	b_max 								1		// 04 //set max value  to 1 (active state = 0) 
+RST  	b_motor								1  		// 05 //set motor driver to 0 
+OR 		reg_0		i_wait_time w_timer 	032		// 06 //set timer = wait time  
+OR   	reg_0 		i_80		w_pressure	032		// 07 //set pressure to i_80% 
+OR 		reg_0 		02			w_timer		032 	// 08 //set timer for to cycles  	
+OR 		reg_0 		03 			w_cnt		032		// 09 //set motor startup counter to 3 times 
+///////////////Program////////////////////////////////
+RST  	w_temp								0  		// 0A //reset registers  
+RST  	r_acc								0  		// 0B //reset registers 
+AND  	b_stop 		b_max 		r_acc 		110 	// 0C // 
+NOT  	r_acc 		r_acc 					00 		// 0D Evaluate reset condition 
+LT   	i_75	 	w_pressure 	w_pres_cond	322		// 0E 
+OR   	r_acc 		w_pres_cond	r_acc 		020		// 0F
+OR   	b_lamp 		b_start 	b_lamp 		111 	// 10  //if start pressed set lamp to 1 
+ANDN 	b_lamp		r_acc		b_lamp		101 	// 11  //if reset codition met then set lamp to 0   
+LD 		b_lamp								1		// 12
+IF1JUMP 14 											// 13  //if lamp not active reset timer  
+OR 		reg_0		i_wait_time w_timer		032		// 14  
+LD 		w_timer								2 		// 15
+IF0JUMP	18											// 16  //if timer is zero jump over decrementation and set motor to 1   
+SUB  	w_timer		b_lamp		w_timer		212		// 17  //decrement timer 
+JUMP 	09											// 18  //start new cycle 
+SET 	b_motor								1		// 19
 ///////////////// edge detection //////////////////////// 
-RST  	r_acc								0  		// 17 
-XOR 	b_motor		r_temp	    r_acc       100 	// 18 	
-OR 		reg_0 		b_motor		r_temp      010 	// 19
-AND  	b_motor 	r_acc 		r_acc 		100   	// 1A  	
-SUB 	w_cnt		r_acc		w_cnt		202 	// 1B
-OR 		reg_0		w_cnt		r_acc		020		// 1C 
-IF1JUMP	1F 											// 1D	
-SET 	b_max								1 		// 1E
-JUMP 	0A											// 1F
+RST 	w_sub2 								2		// 1A  // reset memory to avoid accidental usage of wrong data 
+RST 	r_acc 								0		// 1B  // reset acc for same reason as above
+XOR 	b_motor 	w_temp 		w_sub2 		122		// 1C  // check for edge 
+AND 	w_sub2 		b_motor 	w_sub2 		212		// 1D  // check for posegde 
+OR 		b_motor		reg_0		w_temp		102 	// 1E  // save previous motor state for egde detection
+LD 		b_ack 								1 		// 1F 	
+IF0JUMP 22  										// 20   //  
+OR 		reg_0		03 			w_cnt   	032 	// 21 	// if ack is 1 then reset counter 
+LD 		w_cnt								2		// 22   // 
+IF0JUMP 25 											// 23   // if count is not 0 decrement 
+SUB 	w_cnt 		w_sub2		r_acc		220		// 24   // decrement couter 
+IF1JUMP	0A 											// 25   // if couter not 0 then start new cycle 	
+SET 	b_max								1 		// 26   // if counter 0 set max to 1 
+JUMP 	0A											// 27   // start new cycle 

@@ -1,7 +1,7 @@
 //`define PARAMETERS 1
 //`ifndef PARAMETERS
 
-parameter PC_WIDTH = 5;
+parameter PC_WIDTH = 6;
 parameter REGISTER_WIDTH = 8;
 parameter NUMBER_OF_REGISTERS = 8;
 parameter MEM_WIDTH = 8;

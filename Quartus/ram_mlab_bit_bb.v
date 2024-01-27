@@ -42,7 +42,7 @@ module ram_mlab_bit (
 
 	input	  clock;
 	input	[0:0]  data;
-	input	[7:0]  rdaddress;
+	input	[7:0]  rdaddress; 
 	input	[7:0]  wraddress;
 	input	  wren;
 	output	[0:0]  q;
