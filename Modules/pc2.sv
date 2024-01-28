@@ -1,7 +1,7 @@
 `timescale 1ns/100ps
 
 module pc#(
-    parameter INSTR_ADDR_SIZE = 5
+    parameter INSTR_ADDR_SIZE = 6
 ) (
     //inputs
     clk,

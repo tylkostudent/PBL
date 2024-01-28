@@ -67,6 +67,7 @@ def create_hex(opcode: Opcode) -> str:
         case 4:
             hex_str = opcode.value + decode_arg(opcode.args[0]) + "00" + decode_arg(opcode.args[1]) + decode_choices(opcode.args[2], opcode.arg_map) 
         case 5:
+            print(opcode.value, opcode.args)
             hex_str = opcode.value + decode_arg(opcode.args[0]) + decode_arg(opcode.args[1]) + decode_arg(opcode.args[2]) + decode_choices(opcode.args[3], opcode.arg_map) 
         case 6:
             hex_str = opcode.value + "0200" + decode_arg(opcode.args[0]) + decode_choices(opcode.args[1], opcode.arg_map) 
@@ -78,12 +79,9 @@ def read_instr_file(file_path: str, opcode_map: dict[str, Opcode]) -> list[str]:
     with open(file_path, 'r') as file:
         for line in file:
             if line.startswith('//'):
-                print("omitting comment: ", line)
                 continue 
             if line.isspace():
-                print("omitting empty line: ", line)
                 continue
-            print("line to compile:", line)
             #Allow comments on each line. 
             parts = line.split ("//")[0]
             #The next line splits on one or more spaces. 

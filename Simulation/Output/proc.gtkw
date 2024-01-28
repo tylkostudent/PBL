@@ -1,28 +1,29 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Mon Jan 22 14:56:14 2024
+[*] Sun Jan 28 12:57:09 2024
 [*]
 [dumpfile] "/home/lukas/Documents/studia/PBL/Simulation/Output/sim.vcd"
-[dumpfile_mtime] "Mon Jan 22 14:37:52 2024"
-[dumpfile_size] 31813
+[dumpfile_mtime] "Sun Jan 28 12:55:37 2024"
+[dumpfile_size] 71174
 [savefile] "/home/lukas/Documents/studia/PBL/Simulation/Output/proc.gtkw"
 [timestart] 0
 [size] 1920 1008
 [pos] -1 -1
-*-15.827644 60700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.157240 1005000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] proc_tb.
 [treeopen] proc_tb.u_proc.
 [treeopen] proc_tb.u_proc.alu_mod.
 [treeopen] proc_tb.u_proc.alu_mod.reg_f.
 [sst_width] 212
-[signals_width] 271
+[signals_width] 279
 [sst_expanded] 1
 [sst_vpaned_height] 290
 @28
 proc_tb.clk
+@23
+proc_tb.u_proc.instr_addr[5:0]
+@28
 proc_tb.u_proc.control_module.zero_flag
-@22
-proc_tb.u_proc.control_module.instr_addr[4:0]
 @c02022
 ^1 /home/lukas/Documents/studia/PBL/Simulation/gtkwave_filter.txt
 +{proc_tb.op_code[5:0]} proc_tb.op_code[5:0]
@@ -50,7 +51,7 @@ proc_tb.u_proc.alu_mod.alu.in_b[7:0]
 (7)proc_tb.u_proc.alu_mod.alu.in_b[7:0]
 @1401200
 -group_end
-@22
+@28
 proc_tb.u_proc.alu_mod.alu.alu_out[7:0]
 @200
 -

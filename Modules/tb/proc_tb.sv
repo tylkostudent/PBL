@@ -2,7 +2,7 @@
 `include "instructions.sv" 
 `define SIMULATION //if define includes simulation only code dont delete it 
 module proc_tb;
-
+integer file;
 reg rst, clk;
 wire [OPCODE_WIDTH - 1:0]op_code;
 wire [VALUE_WIDTH - 1:0] alu_out;
@@ -26,14 +26,25 @@ proc u_proc(
 	    #5 clk = ~clk;
     end
     initial begin
-	    clk = 1;
+	    clk = 0;
 	    rst = 1;
 	    #10
 	    rst = 0;
-	    #1000
+	    #1000   
+	    //$fclose(file);
 	    $finish;
     end
 
+/*initial begin
+	file = $fopen("log.txt", "a");
+
+end
+
+always @(posedge clk) begin
+	$fwrite(file, "op_code:%h; alu:%h\n", op_code, alu_out);
+end*/
+
+ 
     initial begin
 	    $dumpfile("./Output/sim.vcd");
 	    $dumpvars(0, proc_tb);

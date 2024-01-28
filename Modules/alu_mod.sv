@@ -87,7 +87,7 @@ flag_reg flag_reg(
 reg_f#(
     .WIDTH(8),
     .SIZE(11),
-    .PC_WIDTH(6)
+    .PC_WIDTH(PC_WIDTH)
 )reg_f(
     .clk(clk),
     .rf_addr_r1(source1[3:0]),
