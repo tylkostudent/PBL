@@ -20,5 +20,5 @@ initial
       $readmemh("hex.hex", memory, 0, 2);
    `endif
    */
-      $readmemh("hex.hex", memory, 0, 39);
+      $readmemh("hex.hex", memory, 0, 45);
 endmodule  

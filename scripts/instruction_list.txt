@@ -46,34 +46,40 @@ OR   	reg_0 		i_80		w_pressure	032		// 07 //set pressure to i_80%
 OR 		reg_0 		02			w_timer		032 	// 08 //set timer for to cycles  	
 OR 		reg_0 		03 			w_cnt		032		// 09 //set motor startup counter to 3 times 
 ///////////////Program////////////////////////////////
-RST  	w_temp								0  		// 0A //reset registers  
+RST  	w_temp								2  		// 0A //reset registers  
 RST  	r_acc								0  		// 0B //reset registers 
 AND  	b_stop 		b_max 		r_acc 		110 	// 0C // 
 NOT  	r_acc 		r_acc 					00 		// 0D Evaluate reset condition 
-LT   	i_75	 	w_pressure 	w_pres_cond	322		// 0E 
+LT   	w_pressure	i_75 		w_pres_cond	232		// 0E 
 OR   	r_acc 		w_pres_cond	r_acc 		020		// 0F
 OR   	b_lamp 		b_start 	b_lamp 		111 	// 10  //if start pressed set lamp to 1 
 ANDN 	b_lamp		r_acc		b_lamp		101 	// 11  //if reset codition met then set lamp to 0   
 LD 		b_lamp								1		// 12
-IF1JUMP 14 											// 13  //if lamp not active reset timer  
-OR 		reg_0		i_wait_time w_timer		032		// 14  
-LD 		w_timer								2 		// 15
-IF0JUMP	18											// 16  //if timer is zero jump over decrementation and set motor to 1   
-SUB  	w_timer		b_lamp		w_timer		212		// 17  //decrement timer 
-JUMP 	09											// 18  //start new cycle 
-SET 	b_motor								1		// 19
+NOP 												// 13
+IF1JUMP 16 											// 14  //if lamp not active reset timer  
+OR 		reg_0		i_wait_time w_timer		032		// 15   
+LD 		w_timer								2 		// 16 
+NOP													// 17  
+IF0JUMP	1B 											// 18    //if timer is zero jump over decrementation and set motor to 1   
+SUB  	w_timer		b_lamp		w_timer		212		// 19   //decrement timer 
+JUMP 	0B 											// 1A   //start new cycle 
+SET 	b_motor								1		// 1B   
 ///////////////// edge detection //////////////////////// 
-RST 	w_sub2 								2		// 1A  // reset memory to avoid accidental usage of wrong data 
-RST 	r_acc 								0		// 1B  // reset acc for same reason as above
-XOR 	b_motor 	w_temp 		w_sub2 		122		// 1C  // check for edge 
-AND 	w_sub2 		b_motor 	w_sub2 		212		// 1D  // check for posegde 
-OR 		b_motor		reg_0		w_temp		102 	// 1E  // save previous motor state for egde detection
-LD 		b_ack 								1 		// 1F 	
-IF0JUMP 22  										// 20   //  
-OR 		reg_0		03 			w_cnt   	032 	// 21 	// if ack is 1 then reset counter 
-LD 		w_cnt								2		// 22   // 
-IF0JUMP 25 											// 23   // if count is not 0 decrement 
-SUB 	w_cnt 		w_sub2		r_acc		220		// 24   // decrement couter 
-IF1JUMP	0A 											// 25   // if couter not 0 then start new cycle 	
-SET 	b_max								1 		// 26   // if counter 0 set max to 1 
-JUMP 	0A											// 27   // start new cycle 
+RST 	w_sub2 								2		// 1C    // reset memory to avoid accidental usage of wrong data 
+RST 	r_acc 								0		// 1D    // reset acc for same reason as above
+XOR 	b_motor 	w_temp 		w_sub2 		122		// 1E    // check for edge 
+AND 	w_sub2 		b_motor 	w_sub2 		212		// 1F    // check for posegde 
+OR 		b_motor		reg_0		w_temp		102 	// 20    // save previous motor state for egde detection
+LD 		b_ack 								1 		// 21  	
+NOP													// 22  
+IF0JUMP 25  										// 23      //  
+OR 		reg_0		03 			w_cnt   	032 	// 24    	// if ack is 1 then reset counter 
+LD 		w_cnt								2		// 25      // 
+NOP 												// 26 
+IF0JUMP 2A 											// 27      // if count is not 0 decrement 
+SUB 	w_cnt 		w_sub2		w_cnt		222		// 28     // decrement couter
+LD 		w_cnt 								2 
+NOP 												// 29
+IF1JUMP	0B 											// 2A     // if couter not 0 then start new cycle 	
+SET 	b_max								1 		// 2B     // if counter 0 set max to 1 
+JUMP 	0B 											// 2C     // start new cycle 

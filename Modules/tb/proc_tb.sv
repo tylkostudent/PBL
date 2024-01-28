@@ -26,29 +26,25 @@ proc u_proc(
 	    #5 clk = ~clk;
     end
     initial begin
-	    clk = 1;
+	    clk = 0;
 	    rst = 1;
 	    #10
 	    rst = 0;
 	    #1000   
-	    $fclose(file);
+	    //$fclose(file);
 	    $finish;
     end
 
-initial begin
+/*initial begin
 	file = $fopen("log.txt", "a");
 
 end
 
 always @(posedge clk) begin
 	$fwrite(file, "op_code:%h; alu:%h\n", op_code, alu_out);
-end
+end*/
 
-always #5 clk = ~clk;
-
-
-
-  
+ 
     initial begin
 	    $dumpfile("./Output/sim.vcd");
 	    $dumpvars(0, proc_tb);
