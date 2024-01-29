@@ -32,8 +32,31 @@ input port_c_we;
 reg MEM [(2**AWIDTH)-1:0];
 
 always @(posedge clk) begin
-	 if(port_c_we) begin
-		  MEM[port_c_address] <= port_c_data;
+    if(port_c_we) begin
+	MEM[port_c_address] <= port_c_data;
+        `ifdef SIMULATION          
+        if(port_c_we & 	
+           (MEM [port_c_address] != port_c_data))
+           case(port_c_address)
+              8'd0 : if (port_c_data == 1)
+               	        $display("    Starting.");
+              8'd1 :  if (port_c_data == 0)
+                        $display("    Stoping.");
+              8'd3 : if (port_c_data == 0)
+                        $display("    Lamp is on.");
+     	             else
+  		        $display("    Lamp is off.");
+	     
+              8'd4 : if (port_c_data == 1)
+                        $display("    Motor is on. ");
+     	            else 
+		        $display("      Motor is off.");
+              8'd5 : if (port_c_data == 1)
+                        $display("    The motor was started 3 times.");
+              default:;
+           endcase
+       ;
+    `endif
 	 end
 end
 
