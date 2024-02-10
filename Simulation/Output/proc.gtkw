@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sun Jan 28 12:57:09 2024
+[*] Sun Jan 28 22:22:29 2024
 [*]
 [dumpfile] "/home/lukas/Documents/studia/PBL/Simulation/Output/sim.vcd"
-[dumpfile_mtime] "Sun Jan 28 12:55:37 2024"
-[dumpfile_size] 71174
+[dumpfile_mtime] "Sun Jan 28 13:02:31 2024"
+[dumpfile_size] 73532
 [savefile] "/home/lukas/Documents/studia/PBL/Simulation/Output/proc.gtkw"
 [timestart] 0
 [size] 1920 1008
 [pos] -1 -1
-*-17.157240 1005000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.157240 275000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] proc_tb.
 [treeopen] proc_tb.u_proc.
 [treeopen] proc_tb.u_proc.alu_mod.
