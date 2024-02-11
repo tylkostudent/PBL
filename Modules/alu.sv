@@ -109,8 +109,9 @@ always @(*) begin
 
         8'h06: begin //NOT
             alu_c_out = 1'b0;
-            alu_b_out = 1'b0;
-            alu_out = ~in_a; 
+            alu_b_out = in_a ? 8'b0: 8'b1; 
+            alu_out = in_a ? 8'b0: 8'b1;
+            //alu_out = ~in_a ; 	   
             alu_flag_valid = 1'b0;
         end
 

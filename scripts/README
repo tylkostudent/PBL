@@ -13,13 +13,25 @@ source_addr1, source_addr2, destination_addr (all in hexadecimal),
 last argument of script is path where hex file will be saved (just
 enter the name for a file and it will be created in current directory)
 
-opcode_list.txt contains opcode names their hex code and third argument are values crutial that define what argument are used in compilation  
+There are different opcode types.
+0.  Takes no arguments.  RET, RET0, RET1
+1.  Takes 1 argument. JMP, IF0JMP, IF1JMP, CAL, CAL0, CAL1
+2.  SET, RST, ST,STN  
+3.  LD and LDN
+4.  NOT
+5 ALU.  takes two sources and a destination.
 
 last argument is choice of sources and destination 
 0 - 00
 1 - 01
 2 - 10
 3 - 11
+
+choice 	
+2’b00	register
+2’b01	bit memory
+2’b10	word memory
+2’b11	immediate
 
 Basically it has a dictionary of opcode names to opcode objects.  The
 opcode object has the binary value of the opcode, the type, and a list

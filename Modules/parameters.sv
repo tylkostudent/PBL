@@ -1,5 +1,6 @@
-//`define PARAMETERS 1
 //`ifndef PARAMETERS
+//`define PARAMETERS 1
+
 
 parameter PC_WIDTH = 6;
 parameter REGISTER_WIDTH = 8;
@@ -15,6 +16,12 @@ parameter ADDR_WIDTH = 8;
 
 parameter TRUE   = 1'b1;
 parameter FALSE  = 1'b0;
+
+parameter useRegister = 2'b0;
+parameter useBit = 2'b01;
+parameter useMemory = 2'b10;
+parameter useImmediate = 2'b11;
+
 
 //DEFINE DEMO FOR A DEMO. 
 `define DEMO 1

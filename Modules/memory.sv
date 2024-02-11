@@ -1,6 +1,8 @@
 `timescale 1ns/100ps
 `default_nettype none
 
+`include "../../PBL/Modules/parameters.sv"
+
 module MEMORY (pc, instruction);
     input [PC_WIDTH - 1 : 0] pc;
     output reg [INSTRUCTION_WIDTH - 1 : 0] instruction;
@@ -14,11 +16,10 @@ module MEMORY (pc, instruction);
 
    
 initial
-/*    `ifdef PBL
-      $readmemh("pbl.hex", memory);
+    `ifdef PBL
+      $readmemh("pbl.hex", memory,0,50);
     `else
-      $readmemh("hex.hex", memory, 0, 2);
+      $readmemh("hex.hex", memory, 0, 45);   
    `endif
-   */
-      $readmemh("hex.hex", memory, 0, 45);
+
 endmodule  

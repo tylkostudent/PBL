@@ -1,6 +1,6 @@
-`ifndef INSTUCTIONS_H
-`define INSTUCTIONS_H
-`include"parameters.sv"
+//`ifndef INSTUCTIONS_H
+//`define INSTUCTIONS_H
+//`include"../../PBL/Modules/parameters.sv"
 enum bit [6 - 1:0] {
   AND  = 6'h00,
   ANDN = 6'h01,
@@ -37,4 +37,4 @@ enum bit [6 - 1:0] {
   LDN  = 6'h20,
   NOP  = 6'h21
 }opCodes;
-`endif
+//`endif
