@@ -97,16 +97,20 @@ def create_hex(opcode: Opcode) -> str:
     match opcode.arg_map:
         case 0:
             hex_str = opcode.value + "00000000"
+            print (hex_str)
         case 1:
-            hex_str = (opcode.value +
+            if opcode.value == "12": #JUMP
+               hex_str = (opcode.value +
+                       decode_arg(opcode.args[0]) +
+                       "0000" +"000")
+                
+            else:
+                hex_str = (opcode.value +
                        decode_arg(opcode.args[0]) +
                        decode_arg(opcode.args[1]) +
                        "00" +
                        decode_choices(opcode.args[2], opcode.arg_map) )             
-            print (opcode.value + " " +
-                   decode_arg(opcode.args[0]) +  " " +
-                   decode_arg(opcode.args[1]) +  " " +                   
-                       decode_choices(opcode.args[2], opcode.arg_map) )
+
 
         case 2:
             hex_str = opcode.value + "0000" + decode_arg(opcode.args[0]) + decode_choices(opcode.args[1], opcode.arg_map)
@@ -164,6 +168,7 @@ def read_instr_file(file_path: str, opcode_map: dict[str, Opcode]) -> list[str]:
                 try:
                   hex = create_hex(opcode)
                 except:
+                    print ("ERROR")
                     breakpoint()
                 hex_lines.append(hex)
     return hex_lines

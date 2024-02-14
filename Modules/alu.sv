@@ -34,26 +34,27 @@ input [IWIDTH-1:0] op_code;
 
 input [$clog2(SOURCES)-1:0] source1_choice;
 input bit_mem_a;
-input [WIDTH-1:0] word_mem_a;
-input [WIDTH-1:0] rf_a;
-input [WIDTH-1:0] imm_a;
-wire [WIDTH-1:0] in_a;
+input signed [WIDTH-1:0] word_mem_a;
+input signed [WIDTH-1:0] rf_a;
+input signed [WIDTH-1:0] imm_a;
+wire signed [WIDTH-1:0] in_a;
 
 input [$clog2(SOURCES)-1:0] source2_choice;
 input bit_mem_b;
-input [WIDTH-1:0] word_mem_b;
-input [WIDTH-1:0] rf_b;
-input [WIDTH-1:0] imm_b;
-wire [WIDTH-1:0] in_b;
+input  signed [WIDTH-1:0] word_mem_b;
+input signed [WIDTH-1:0] rf_b;
+input signed [WIDTH-1:0] imm_b;
+wire signed [WIDTH-1:0] in_b;
 
 input alu_c_in;
 input alu_b_in;
 
-output reg [WIDTH-1:0] alu_out;
+output reg signed [WIDTH-1:0] alu_out;
 output reg alu_c_out;
 output reg alu_b_out;
 output reg alu_flag_valid;
-
+reg signed [31:0] product;
+   
 assign in_a = (source1_choice[1] ? (source1_choice[0] ? imm_a : word_mem_a) : (source1_choice[0] ? bit_mem_a : rf_a));
 assign in_b = (source2_choice[1] ? (source2_choice[0] ? imm_b : word_mem_b) : (source2_choice[0] ? bit_mem_b : rf_b));
 
@@ -123,14 +124,21 @@ always @(*) begin
 
         8'h08: begin //SUB
             alu_c_out = 1'b0;
-            {alu_b_out, alu_out} = in_a - in_b - alu_b_in;
+            //{alu_b_out, alu_out} = in_a - in_b - alu_b_in;
+            alu_out = in_a - in_b;	   
             alu_flag_valid = 1'b1;
+	   //$display (in_a, "  ", in_b, "  ", alu_out,  " IN ALU");
+	   
         end
 
         8'h09: begin //MUL
             alu_c_out = 1'b0;
             alu_b_out = 1'b0;
-            alu_out = in_a * in_b;
+	   //$display ("MULTIPly %b", in_a, " * %b", in_b, "= %b", product, " or %b", alu_out);	   
+            product = in_a * in_b;
+            alu_out = {product[31], product[14:0]};
+	   //$display ("MULTIPly %b", in_a, " * %b", in_b, "= %b", product, " or %b", alu_out);
+	   
             alu_flag_valid = 1'b0;
         end
 
@@ -139,7 +147,8 @@ always @(*) begin
             alu_b_out = 1'b0;
             alu_out = in_a / in_b; 
             alu_flag_valid = 1'b0;
-        end
+	    //$display (in_a, "  ", in_b, "  ", alu_out,  " IN DIV");
+	    end
 
         8'h0B: begin //MOD
             alu_c_out = 1'b0;

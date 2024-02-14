@@ -4,7 +4,8 @@
 
 parameter PC_WIDTH = 6;
 parameter REGISTER_WIDTH = 8;
-parameter NUMBER_OF_REGISTERS = 8;
+parameter NUMBER_OF_REGISTERS = 10;
+parameter LOG_OF_REGISTERS = 4;
 parameter MEM_WIDTH = 8;
 
 //Instruction is 4 bits instructin, 4 bits register, 8 bits address 
